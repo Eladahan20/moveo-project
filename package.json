@@ -1,11 +1,17 @@
 {
+  "name": "elad-moveo-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "express": "^4.18.2",
     "http": "^0.0.1-security",
     "path": "^0.12.7",
     "request": "^2.88.2",
     "require": "^2.4.20",
-    "ws": "^8.12.0",
-    "start": "server.js"
+    "ws": "^8.12.0"
   }
 }
