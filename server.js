@@ -30,12 +30,14 @@ wss.on('connection', function connection(ws) {
 
 const port = process.env.PORT || 8080;
 
+app.use(express.static('Public'));
+
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, '/index.html'));
+    res.sendFile(path.join(__dirname, 'Public/index.html'));
   });
 
   app.get('/code1', function(req, res) {
-    res.sendFile(path.join(__dirname, '/code1.html'));
+    res.sendFile(path.join(__dirname, 'Public/code1.html'));
   });
 
 server.listen(port, () => {
