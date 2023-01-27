@@ -9,6 +9,9 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '/index.html'));
   });
 
+  app.get('/code1', function(req, res) {
+    res.sendFile(path.join(__dirname, '/code1.html'));
+  });
 
 app.listen(port, () => {
     console.log('Server started');
