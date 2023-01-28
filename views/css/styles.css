@@ -40,7 +40,13 @@ h4 {
     padding: 10px;
     width: 100%; /* Make the image fill the width of the card */
   }
-
+  @media (max-width: 600px) {
+    .card {
+      width: 100%;
+      float: none;
+      margin: 15px 5px;
+    }
+  }
   a.card {
     text-decoration: none;
     color: inherit;
