@@ -1,6 +1,6 @@
     // Create WebSocket connection.
     console.log('helo!');
-    const socket = new WebSocket('wss://moveo-pro.herokuapp.com/code1');
+    const socket = new WebSocket('wss://moveo-pro.herokuapp.com/code');
     // const socket = new WebSocket('ws://localhost:8080');
 
 // Connection opened
@@ -30,6 +30,5 @@ editableCode.setAttribute("contenteditable",false);
 role.innerHTML = "Mentor";
 } else {
 editableCode.innerHTML = event.data.toString();
-role.innerHTML = "Student";
 }
 };
