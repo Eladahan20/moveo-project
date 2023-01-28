@@ -13,13 +13,14 @@
     <pre><code id="editableCode" contenteditable>
 <%=codeblock.code.toString() %>
 </code></pre>
-<button onclick="sendMessage()">Fire!</button>
+<button onclick="sendMessage()">End Drill</button>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <script>hljs.highlightAll();</script>
 
 </body>
 <script>
-        const socket = new WebSocket('wss://moveo-p.herokuapp.com/code/<%=codeblock.id%>}');
+
+
 
 </script>
 <script src="/js/Websocket.js"></script>
