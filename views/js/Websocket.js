@@ -31,6 +31,5 @@ role.innerHTML = "Mentor";
 } else {
 editableCode.innerHTML = event.data.toString();
 role.innerHTML = "Student";
-
 }
 };
