@@ -22,7 +22,7 @@ wss.on("connection", function connection(ws) {
     console.log("Student Logged In");
     ws.on("message", function incoming(message) {
       wss.clients.forEach(function each(client) {
-        if (client.readyState === WebSocket.OPEN) {
+        if (client !== ws && client.readyState === WebSocket.OPEN) {
           client.send(message.toString());
         }
       });
