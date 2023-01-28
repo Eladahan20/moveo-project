@@ -9,17 +9,19 @@
 </head>
 <body>
     <h1>Hello</h1>
-    
-    <div class="card-container">
-      <% codeBlocks.forEach(function(card) { %>
-        <a href="code<%=card.id %>.html" class="card">
-          <img src="<%= card.img %>" alt="<%= card.title %>">
-          <div class="card-body">
-            <h3><%= card.title %></h3>
-            <p><%= card.description %></p>
-          </div>
-        </a>
-      <% }); %>
+
+<div class="card-container">
+  <% codeblocks.forEach(function(codeblock) { %>
+    <a href="/code/<%= codeblock.id %>" class="card" data-codeblock-id="<%= codeblock.id %>">
+        <img src="<%= codeblock.img %>" alt="<%= codeblock.title %>">
+        <div class="card-body">
+            <h5 class="card-title"><%= codeblock.title %></h5>
+            <p class="card-text"><%= codeblock.description %></p>
+        </div>
+    </a>
+  <% }); %>
+</div>
+
          
 </body>
 

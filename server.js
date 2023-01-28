@@ -36,8 +36,16 @@ app.use(express.static('views'));
 
 
 app.get('/', function(req, res) {
-    res.render('index', {codeBlocks: codeblocks});
+    res.render('index', {codeblocks: codeblocks});
   });
+
+  app.get("/code/:codeblockId", (req, res) => {
+    const codeblockId = req.params.codeblockId;
+    console.log(codeblockId);
+    const codeblock = codeblocks.find(c => c.id === parseInt(codeblockId));
+    console.log(codeblock);
+    res.render("code", { codeblock });
+});
 
   app.get('/code1', function(req, res) {
     res.sendFile(path.join(__dirname, 'Public/code1.html'));
