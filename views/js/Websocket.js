@@ -1,6 +1,6 @@
     // Create WebSocket connection.
     console.log('helo!');
-    const socket = new WebSocket('wss://moveo-pro.herokuapp.com/code');
+    const socket = new WebSocket('wss://moveo-p.herokuapp.com/code');
     // const socket = new WebSocket('ws://localhost:8080');
 
 // Connection opened
