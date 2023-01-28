@@ -17,10 +17,9 @@ socket.onclose = (event) => {
 //     console.log('Message from server ', event.data);
 // });
 
-const sendMessage = () => {
-  console.log(socket);
+const endDrill = () => {
   socket.close();
-  console.log(socket);
+  window.location.href= '/';
 };
 
 
