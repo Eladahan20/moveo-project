@@ -14,7 +14,6 @@ wss.on('connection', function connection(ws) {
     console.log('Connection made');
     // console.log(wss.clients.size)
     if (wss.clients.size === 1) {
-        firstUser=false;
         console.log('Mentor Logged In')
         ws.send('Mentor');
     } else {
