@@ -9,10 +9,10 @@ const WebSocket = require('ws');
 
 
 const wss = new WebSocket.Server({ server:server });
-console.log(wss.clients.size);
+
 wss.on('connection', function connection(ws) {
     console.log('Connection made');
-    console.log(wss.clients.size)
+    // console.log(wss.clients.size)
     if (wss.clients.size === 1) {
         firstUser=false;
         console.log('Mentor Logged In')
@@ -41,9 +41,7 @@ app.get('/', function(req, res) {
 
   app.get("/code/:codeblockId", (req, res) => {
     const codeblockId = req.params.codeblockId;
-    console.log(codeblockId);
     const codeblock = codeblocks.find(c => c.id === parseInt(codeblockId));
-    console.log(codeblock);
     res.render("code", { codeblock });
 });
 
