@@ -14,7 +14,7 @@ console.log('Connected to WS Server')
 // });
 
 const sendMessage = () => {
-socket.send('Hello From Client1!');
+socket.terminate();
 }
 var editableCode = document.getElementById("editableCode");
 var role = document.getElementById("role");
