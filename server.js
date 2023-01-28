@@ -2,16 +2,18 @@ const express = require('express');
 const request = require('request');
 const path = require('path');
 const app = express();
+const codeblocks = require("./data/codeblocks.js");
 
 const server = require('http').createServer(app);
 const WebSocket = require('ws');
 
-const wss = new WebSocket.Server({ server:server });
-let firstUser= true;
 
+const wss = new WebSocket.Server({ server:server });
+console.log(wss.clients.size);
 wss.on('connection', function connection(ws) {
     console.log('Connection made');
-    if (firstUser) {
+    console.log(wss.clients.size)
+    if (wss.clients.size === 1) {
         firstUser=false;
         console.log('Mentor Logged In')
         ws.send('Mentor');
@@ -29,11 +31,12 @@ wss.on('connection', function connection(ws) {
   });
 
 const port = process.env.PORT || 8080;
+app.set('view engine', 'ejs');
+app.use(express.static('views'));
 
-app.use(express.static('Public'));
 
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, 'Public/index.html'));
+    res.render('index', {codeBlocks: codeblocks});
   });
 
   app.get('/code1', function(req, res) {
