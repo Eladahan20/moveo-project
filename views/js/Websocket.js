@@ -1,7 +1,7 @@
 // Create WebSocket connection.
 
-const socket = new WebSocket('wss://moveo-p.herokuapp.com/code');
-// const socket = new WebSocket("ws://localhost:8080");
+// const socket = new WebSocket('wss://moveo-p.herokuapp.com/code');
+const socket = new WebSocket("ws://localhost:8080");
 
 // Connection opened
 socket.addEventListener("open", function (event) {
@@ -17,9 +17,9 @@ socket.onclose = (event) => {
 //     console.log('Message from server ', event.data);
 // });
 
-const endDrill = () => {
-  socket.close();
-  window.location.href= '/';
+const endDrill = (code, solution) => {
+    socket.close();
+    window.location.href= '/';
 };
 
 
@@ -27,8 +27,12 @@ var editableCode = document.getElementById("editableCode");
 var role = document.getElementById("role");
 
 editableCode.addEventListener("input", function () {
+    var solution = document.getElementById('codeSolution').innerHTML;
+    if (this.innerHTML === solution) {
+        document.getElementById("smiley").style.display = "block";
+    }
   // Send the updated code to the server via the WebSocket connection
-  socket.send(this.innerHTML);
+    socket.send(this.innerHTML);
 });
 
 // Listen for messages from the server
@@ -38,6 +42,7 @@ socket.onmessage = function (event) {
     editableCode.setAttribute("contenteditable", false);
     role.innerHTML = "Mentor";
   } else {
+    role.innerHTML = "Student";
     editableCode.innerHTML = event.data.toString();
   }
 };

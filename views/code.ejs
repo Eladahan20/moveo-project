@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+
     <title>Code 1</title>
 </head>
+
 <body>
-    <h2><%=codeblock.title %></h2>
+    <h2>
+        <%=codeblock.title %>
+    </h2>
     <p>You're Logged in as <span id="role"></span></p>
-    <pre><code id="editableCode" contenteditable>
-<%=codeblock.code.toString() %>
-</code></pre>
-<button onclick="endDrill()">End Drill</button>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
+    <pre>
+        <code id="editableCode" contenteditable>
+            <%=codeblock.code.toString() %>
+        </code>
+    </pre>
+    <pre>
+        <code id="codeSolution" style="display:none">
+            <%=codeblock.solution.toString() %>
+        </code>
+    </pre>
+    <div id="smiley" class="smiley-container" style="display: none">
+        <div class="smiley" style="animation: jump 1s ease-in-out infinite;">
+          <div class="eye"></div>
+          <div class="eye"></div>
+          <div class="mouth" style="border-radius: 0 0 80% 80%;"></div>
+        </div>
+      </div>
+    <button onclick="endDrill()">End Drill</button>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 
 </body>
-<script>
 
-
-
-</script>
 <script src="/js/Websocket.js"></script>
 
 

@@ -61,3 +61,56 @@ h4 {
     height: 200px; /* or any other value that you want */
     object-fit: cover;
   }
+  .smiley-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .smiley {
+    width: 200px;
+    height: 200px;
+    background-color: yellow;
+    border-radius: 50%;
+    position: relative;
+  }
+  
+  .eye {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: black;
+    position: absolute;
+    top: 40px;
+  }
+  
+  .eye:first-of-type {
+    left: 60px;
+  }
+  
+  .eye:last-of-type {
+    left: 140px;
+  }
+  
+  .mouth {
+    width: 100px;
+    height: 80px;
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    left: 50px;
+    transform: rotate(20deg);
+  }
+  
+  @keyframes jump {
+    0% {
+      transform: translateY(0);
+    }
+    20% {
+      transform: translateY(-30px);
+    }
+    40% {
+      transform: translateY(0);
+    }
+  }
