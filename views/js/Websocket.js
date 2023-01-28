@@ -17,7 +17,7 @@ socket.onclose = (event) => {
 //     console.log('Message from server ', event.data);
 // });
 
-const endDrill = (code, solution) => {
+const endDrill = () => {
     socket.close();
     window.location.href= '/';
 };
@@ -32,7 +32,7 @@ editableCode.addEventListener("input", function () {
         document.getElementById("smiley").style.display = "block";
     }
   // Send the updated code to the server via the WebSocket connection
-    socket.send(this.textContent);
+    socket.send(this.innerHTML);
 });
 
 // Listen for messages from the server
@@ -43,6 +43,6 @@ socket.onmessage = function (event) {
     role.innerHTML = "Mentor";
   } else {
     role.innerHTML = "Student";
-    editableCode.textContent = event.data.toString();
+    editableCode.innerHTML = event.data.toString();
   }
 };
