@@ -32,3 +32,7 @@ role.innerHTML = "Mentor";
 editableCode.innerHTML = event.data.toString();
 }
 };
+
+window.addEventListener("beforeunload", function(event) {
+    websocket.close(1000, "Client requested closure");
+  });
