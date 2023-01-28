@@ -39,7 +39,7 @@ editableCode.addEventListener("input", function () {
 socket.onmessage = function (event) {
   // Update the editable <code> element with the latest code from the server
   if (event.data.toString() == "Mentor") {
-    // editableCode.setAttribute("contenteditable", false);
+    editableCode.setAttribute("contenteditable", false);
     role.innerHTML = "Mentor";
   } else {
     role.innerHTML = "Student";
