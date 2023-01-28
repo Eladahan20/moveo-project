@@ -17,6 +17,7 @@ const sendMessage = () => {
 socket.send('Hello From Client1!');
 }
 var editableCode = document.getElementById("editableCode");
+var role = document.getElementById("role");
 editableCode.addEventListener("input", function() {
 // Send the updated code to the server via the WebSocket connection
 socket.send(this.innerHTML);
@@ -26,7 +27,10 @@ socket.onmessage = function(event) {
 // Update the editable <code> element with the latest code from the server
 if (event.data.toString() == "Mentor") {
 editableCode.setAttribute("contenteditable",false);
+role.innerHTML = "Mentor";
 } else {
 editableCode.innerHTML = event.data.toString();
+role.innerHTML = "Student";
+
 }
 };
