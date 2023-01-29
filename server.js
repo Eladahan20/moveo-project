@@ -11,7 +11,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(express.static('public'));
 //Mongo Atlas DB URI
-const dbUri = 'mongodb+srv://eladdahan:xWWEgv7Lez8hJx5@cluster0.imfflbo.mongodb.net/Codes?retryWrites=true&w=majority'
+const dbUri = 'mongodb+srv://<username>:<password></password>@cluster0.imfflbo.mongodb.net/Codes?retryWrites=true&w=majority'
 
 //Set up Websocket
 const server = require("http").createServer(app);
