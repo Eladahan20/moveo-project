@@ -51,10 +51,9 @@ wss.on("connection", function connection(ws) {
 
 //App Routes
 app.get("/", function (req, res) {
-  // Code.find()
-  // .then((results) => res.render("index", { codeblocks: results }) )
-  // .catch((err) => console.log(err));
-  res.render("index", { codeblocks: results })
+  Code.find()
+  .then((results) => res.render("index", { codeblocks: results }) )
+  .catch((err) => console.log(err));
 });
 
 app.get("/code/:codeblockId", (req, res) => {
