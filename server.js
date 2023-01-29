@@ -1,15 +1,28 @@
 const express = require("express");
 const request = require("request");
 const path = require("path");
-const app = express();
+const mongoose = require('mongoose');
+const Code = require('./models/Code');
 
-// load DB
-const codeblocks = require("./data/codeblocks.js");
+//Initalize Express App
+const port = process.env.PORT || 8080;
+const app = express();
+//App sets and middlewares
+app.set("view engine", "ejs");
+app.use(express.static('public'));
+//Mongo Atlas DB URI
+const dbUri = 'mongodb+srv://eladdahan:xWWEgv7Lez8hJx5@cluster0.imfflbo.mongodb.net/Codes?retryWrites=true&w=majority'
 
 //Set up Websocket
 const server = require("http").createServer(app);
 const WebSocket = require("ws");
 const wss = new WebSocket.Server({ server: server });
+
+//Connect Mongoose and start listening
+mongoose.connect(dbUri)
+  .then((res) => server.listen(port))
+  .catch((err) => console.log(err));
+
 
 //Websocket Events Handler
 wss.on("connection", function connection(ws) {
@@ -28,30 +41,28 @@ wss.on("connection", function connection(ws) {
       });
     });
   }
-  //Connection Ends
   ws.on("close", (code, reason) => {
     console.log(wss.clients.size);
     console.log("client disconnected from server");
   });
 });
 
-//App sets and routes
-app.set("view engine", "ejs");
-app.use(express.static("views"));
 
+
+//App Routes
 app.get("/", function (req, res) {
-  res.render("index", { codeblocks: codeblocks });
+  Code.find()
+  .then((results) => res.render("index", { codeblocks: results }) )
+  .catch((err) => console.log(err));
 });
 
 app.get("/code/:codeblockId", (req, res) => {
   const codeblockId = req.params.codeblockId;
-  const codeblock = codeblocks.find((c) => c.id === parseInt(codeblockId));
-  res.render("code", { codeblock });
+  Code.findOne({id: codeblockId})
+    .then((codeblock) => res.render("code", { codeblock }))
+    .catch((err) => console.log(err))
 });
 
 
-const port = process.env.PORT || 8080;
 
-server.listen(port, () => {
-  console.log("Server started");
-});
+
