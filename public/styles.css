@@ -93,31 +93,35 @@ h4 {
     position: relative;
   }
   
-  .eye {
+  .right-eye {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     background-color: black;
     position: absolute;
     top: 40px;
+    left: 40px;
+
   }
-  
-  .eye:first-of-type {
-    left: 60px;
-  }
-  
-  .eye:last-of-type {
-    left: 140px;
-  }
-  
-  .mouth {
-    width: 100px;
-    height: 80px;
+    
+  .left-eye {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     background-color: black;
     position: absolute;
-    bottom: 0;
-    left: 50px;
-    transform: rotate(20deg);
+    top: 40px;
+    left: 113px;
+
+  }
+
+  .mouth {
+    width: 114px;
+    height: 58px;
+    background-color: black;
+    position: absolute;
+    bottom: 28px;
+    left: 40px;
   }
   
   @keyframes jump {
