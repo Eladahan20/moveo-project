@@ -41,7 +41,7 @@ io.on("connection", (socket) => {
 });
 // Replies the code updates and broadcast to all clients exepct the one who fired.
 io.on("code-changes", (message) => {
-  socket.broadcast.emit("recieve-message", message);
+  socket.emit("recieve-message", message);
 });
 
 //App Routes
