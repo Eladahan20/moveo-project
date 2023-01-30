@@ -1,5 +1,5 @@
 // Create WebSocket connection.
-const socket = io("https://moveo-p.herokuapp.com/code");
+const socket = io();
 
 // Get elements
 let editableCode = document.getElementById("editableCode");
