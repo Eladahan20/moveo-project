@@ -8,9 +8,9 @@
     <title>Document</title>
 </head>
 <body>
+  <% /* On get request for hompeage, ejs recieved the array of codeblocks from DB and renders it */ %>
     <h1>Bootcamp Lobby</h1>
     <h4>A remote private school</h4>
-
 <div class="card-container">
   <% codeblocks.forEach(function(codeblock) { %>
     <a href="/code/<%= codeblock.id %>" class="card" data-codeblock-id="<%= codeblock.id %>">

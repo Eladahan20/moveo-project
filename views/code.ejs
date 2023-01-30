@@ -12,43 +12,41 @@
 </head>
 
 <body>
-    <h1>
-        <%=codeblock.title %>
-    </h1>
-    <div class="codeblock-area">
-        <h4>
-            <%=codeblock.description %>
-        </h4>
-        <pre>
+    <% /* when request a certain code, the server pass along the specific codeblocks and renders it */ %>
+        <h1>
+            <%=codeblock.title %>
+        </h1>
+        <div class="codeblock-area">
+            <h4>
+                <%=codeblock.description %>
+            </h4>
+            <pre>
         <code id="editableCode" contenteditable>
             <%=codeblock.code.toString() %>
         </code>
     </pre>
-        <pre style="display:none">
+            <pre style="display:none">
         <code id="codeSolution">
             <%=codeblock.solution.toString() %>
         </code>
     </pre>
-        <button class="endDrillButton" onclick="endDrill()">End Drill</button>
-    </div>
-    <div id="smiley" class="smiley-container">
-        <div class="smiley" style="animation: jump 1s ease-in-out infinite;">
-            <div class="right-eye"></div>
-            <div class="left-eye"></div>
-            <div class="mouth" style="border-radius: 0 0 80% 80%;"></div>
+            <button class="endDrillButton" onclick="endDrill()">End Drill</button>
         </div>
-    </div>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
+        <% /* Smiley will show up when code by user is equal to solution */ %>
+            <div id="smiley" class="smiley-container">
+                <div class="smiley" style="animation: jump 1s ease-in-out infinite;">
+                    <div class="right-eye"></div>
+                    <div class="left-eye"></div>
+                    <div class="mouth" style="border-radius: 0 0 80% 80%;"></div>
+                </div>
+            </div>
+            <% /* Highlight JS */ %>
+                <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+                <script>hljs.highlightAll();</script>
 
 </body>
-
-<script src="/socket.io/socket.io.js"></script>
-
-  
-  <script src="/script.js"></script>
-
-
-
+<% /* Socket.io js + application client side script*/ %>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/script.js"></script>
 
 </html>
