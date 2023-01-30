@@ -14,7 +14,7 @@ app.use(express.static("public"));
 
 //Mongo Atlas DB URI
 const dbUri =
-  "mongodb+srv://<user>:<pass>@cluster0.imfflbo.mongodb.net/Codes?retryWrites=true&w=majority";
+  "mongodb+srv://eladdahan:xWWEgv7Lez8hJx5@cluster0.imfflbo.mongodb.net/Codes?retryWrites=true&w=majority";
 
 //Connect Mongoose and start listening
 mongoose
