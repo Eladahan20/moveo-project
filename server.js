@@ -38,11 +38,14 @@ io.on("connection", (socket) => {
   socket.on("disconnect", (reason) => {
     console.log("user disconnected ");
   });
+  socket.on("code-changed", (message) => {
+    console.log(message);
+    socket.broadcast.emit("recieve-message", message);
+  });
+
 });
+
 // Replies the code updates and broadcast to all clients exepct the one who fired.
-io.on("code-changes", (message) => {
-  socket.emit("recieve-message", message);
-});
 
 //App Routes
 // Homepage - pull all codeblocks from db
