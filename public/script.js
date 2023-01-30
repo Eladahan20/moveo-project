@@ -1,41 +1,32 @@
 // Create WebSocket connection.
+const socket = io("https://moveo-p.herokuapp.com/code");
 
-const socket = new WebSocket('wss://moveo-p.herokuapp.com/code');
-// const socket = new WebSocket("ws://localhost:8080");
+// Get elements
+let editableCode = document.getElementById("editableCode");
+let solution = document.getElementById("codeSolution").textContent;
 
-// Connection opened
-socket.addEventListener("open", function (event) {
-  console.log("Connected to WS Server");
+// Socket mentor/student distinguish
+socket.on("new-login", (isMentor) => {
+  if (isMentor) {
+    editableCode.setAttribute("contenteditable", false);
+  }
 });
-// Connection closed
-socket.onclose = (event) => {
-  console.log(`Connection closed: ${event.code} ${event.reason}`);
-};
+
+// update the code area with each message
+socket.on("recieve-message", (messsage) => {
+  editableCode.textContent = messsage;
+});
+
+// fires the inout from the student to the socket, fires smiley if done. 
+editableCode.addEventListener("input", function () {
+  if (this.textContent == solution) {
+    document.getElementById("smiley").style.display = "block";
+  }
+  socket.emit("code-changed", this.textContent);
+});
+
 //End drill, close socket and redirect to homepage
 const endDrill = () => {
-    socket.close();
-    window.location.href= '/';
-};
-
-//Client interaction with socket
-var editableCode = document.getElementById("editableCode");
-editableCode.addEventListener("input", function () {
-  //Checks if code is complete and correct to trigger smiley 
-    var solution = document.getElementById('codeSolution').textContent;
-    if (this.textContent == solution) {
-      console.log('true');
-        document.getElementById("smiley").style.display = "block";
-    }
-  // Send the updated code to the server via the WebSocket connection
-    socket.send(this.textContent);
-});
-
-// Listen for messages from the server
-socket.onmessage = function (event) {
-  // Update the editable <code> element with the latest code from the server
-  if (event.data.toString() == "Mentor") {
-    editableCode.setAttribute("contenteditable", false);
-  } else {
-    editableCode.textContent = event.data.toString();
-  }
+  socket.disconnect();
+  window.location.href = "/";
 };

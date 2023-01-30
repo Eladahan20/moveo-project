@@ -1,22 +1,19 @@
 const express = require("express");
-const request = require("request");
-const path = require("path");
 const mongoose = require('mongoose');
 const Code = require('./models/Code');
+const { Server } = require("socket.io");
 
 //Initalize Express App
 const port = process.env.PORT || 8080;
 const app = express();
+const server = require("http").createServer(app);
+
 //App sets and middlewares
 app.set("view engine", "ejs");
 app.use(express.static('public'));
-//Mongo Atlas DB URI
-const dbUri = 'mongodb+srv://<username>:<password></password>@cluster0.imfflbo.mongodb.net/Codes?retryWrites=true&w=majority'
 
-//Set up Websocket
-const server = require("http").createServer(app);
-const WebSocket = require("ws");
-const wss = new WebSocket.Server({ server: server });
+//Mongo Atlas DB URI
+const dbUri = 'mongodb+srv://eladdahan:xWWEgv7Lez8hJx5@cluster0.imfflbo.mongodb.net/Codes?retryWrites=true&w=majority'
 
 //Connect Mongoose and start listening
 mongoose.connect(dbUri)
@@ -24,30 +21,30 @@ mongoose.connect(dbUri)
   .catch((err) => console.log(err));
 
 
-//Websocket Events Handler
-wss.on("connection", function connection(ws) {
-  console.log("Connection made");
-  //Client check (Mentor/Student), and implement states
-  if (wss.clients.size === 1) {
-    console.log("Mentor Logged In");
-    ws.send("Mentor");
-  } else {
-    console.log("Student Logged In");
-    ws.on("message", function incoming(message) {
-      wss.clients.forEach(function each(client) {
-        if (client !== ws && client.readyState === WebSocket.OPEN) {
-          client.send(message.toString());
-        }
+//New Socket
+const io = new Server(server, { /* options */ });
+
+  io.on("connection", (socket) => {
+    let isMentor = true;
+    console.log('connection made');
+    const count = io.engine.clientsCount;
+    console.log(count);
+    if (count > 1) {
+      isMentor = false;
+    }
+      console.log("is mentor: " + isMentor);
+      io.emit('new-login', isMentor)
+      socket.on("disconnect", (reason) => {
+        console.log('user disconnected ');
+        console.log(count);
+
       });
     });
-  }
-  ws.on("close", (code, reason) => {
-    console.log(wss.clients.size);
-    console.log("client disconnected from server");
+  
+  io.on("code-changes", (message) => {
+    socket.broadcast.emit("recieve-message", message);
   });
-});
-
-
+  
 
 //App Routes
 app.get("/", function (req, res) {
